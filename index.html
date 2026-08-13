@@ -4,88 +4,241 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aaron Vale UI Components</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet" />
     <style>
-      :root {
-        color-scheme: dark;
-        --bg: #050608;
-        --panel: rgba(255, 255, 255, 0.04);
-        --panel-border: rgba(255, 255, 255, 0.08);
-        --text: #ffffff;
-        --muted: rgba(255, 255, 255, 0.58);
-      }
-
       * {
         box-sizing: border-box;
       }
 
+      html,
       body {
-        min-height: 100vh;
+        min-height: 100%;
         margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 32px;
-        background: var(--bg);
-        color: var(--text);
-        font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      body {
+        background: #ffffff;
+        color: #000000;
+        font-family: "Inter", system-ui, sans-serif;
+        font-synthesis: none;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
       }
 
       main {
-        width: min(680px, 100%);
+        width: min(432px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding-top: 54px;
+      }
+
+      .intro {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+      }
+
+      .avatar {
+        display: block;
+        height: 30px;
+        width: auto;
+        margin: 0 0 80px;
       }
 
       h1 {
-        margin: 0 0 10px;
-        font-size: 28px;
-        line-height: 34px;
-        font-weight: 600;
-        letter-spacing: -0.02em;
-      }
-
-      p {
-        margin: 0 0 24px;
-        color: var(--muted);
+        width: fit-content;
+        margin: 0;
+        color: #000000;
         font-size: 16px;
-        line-height: 24px;
+        line-height: 20px;
+        font-weight: 400;
+        letter-spacing: -0.01em;
       }
 
-      a {
-        min-height: 56px;
+      .summary {
+        width: 100%;
+        margin: 0;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 16px;
+        line-height: 140%;
+        font-weight: 300;
+        letter-spacing: -0.01em;
+      }
+
+      .divider {
+        width: calc(100% + 1px);
+        height: 1px;
+        margin: 32px 0 32px -1px;
+        background: rgba(0, 0, 0, 0.04);
+      }
+
+      .component-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+      }
+
+      .component-row {
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 20px;
-        padding: 16px 18px;
-        border: 1px solid var(--panel-border);
-        border-radius: 14px;
-        background: var(--panel);
-        color: var(--text);
+        gap: 180px;
+        color: #000000;
         text-decoration: none;
-        transition:
-          background-color 180ms ease,
-          border-color 180ms ease,
-          transform 180ms ease;
       }
 
-      a:hover {
-        background: rgba(255, 255, 255, 0.07);
-        border-color: rgba(255, 255, 255, 0.14);
-        transform: translateY(-1px);
+      .component-name {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        min-width: 0;
       }
 
-      span {
-        color: var(--muted);
+      .component-number {
+        width: 20px;
+        flex: 0 0 20px;
+        display: flex;
+        justify-content: center;
+        color: #000000;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        text-align: center;
+      }
+
+      .component-title {
+        width: fit-content;
+        flex: 0 0 auto;
+        color: #000000;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+      }
+
+      .component-action {
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        color: #a3a3a3;
+      }
+
+      .component-action svg {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .component-number,
+      .component-title,
+      .component-action {
+        transition: color 180ms ease;
+      }
+
+      .component-row:hover .component-number,
+      .component-row:hover .component-title,
+      .component-row:hover .component-action {
+        color: #0287f2;
+      }
+
+      .component-row:hover .component-action {
+        animation: row-arrow-shake 560ms cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      @keyframes row-arrow-shake {
+        0% {
+          transform: translateX(0) rotate(0deg) scale(1);
+        }
+
+        18% {
+          transform: translateX(-1px) rotate(-7deg) scale(1.025);
+        }
+
+        40% {
+          transform: translateX(1px) rotate(6deg) scale(1.025);
+        }
+
+        62% {
+          transform: translateX(-0.5px) rotate(-3.5deg) scale(1.012);
+        }
+
+        82% {
+          transform: translateX(0.35px) rotate(2deg) scale(1.006);
+        }
+
+        100% {
+          transform: translateX(0) rotate(0deg) scale(1);
+        }
+      }
+
+      @media (max-width: 560px) {
+        main {
+          width: calc(100vw - 40px);
+          margin: 0 20px;
+          padding-top: 40px;
+        }
+
+        .divider {
+          margin-top: 44px;
+        }
+
+        .component-row {
+          gap: 24px;
+        }
       }
     </style>
   </head>
   <body>
     <main>
-      <h1>UI Components</h1>
-      <p>Interactive interface experiments and reusable components.</p>
-      <a href="./compose-ai-box/">
-        Compose Message AI Box
-        <span>Open</span>
-      </a>
+      <img class="avatar" src="./assets/aaronvale-favicon.png" alt="" aria-hidden="true" />
+      <section class="intro" aria-labelledby="page-title">
+        <h1 id="page-title">UI Components</h1>
+        <p class="summary">
+          A growing set of interactive interface experiments focused on motion, sound,
+          and polished micro-interactions for modern product experiences.
+        </p>
+      </section>
+
+      <div class="divider" aria-hidden="true"></div>
+
+      <nav class="component-list" aria-label="UI components">
+        <a class="component-row" href="./compose-ai-box/">
+          <span class="component-name">
+            <span class="component-number">01</span>
+            <span class="component-title">AI Input Box</span>
+          </span>
+          <span class="component-action" aria-label="Open">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M5 11 11 5" />
+              <path d="M6 5h5v5" />
+            </svg>
+          </span>
+        </a>
+        <a class="component-row" href="#" aria-disabled="true">
+          <span class="component-name">
+            <span class="component-number">02</span>
+            <span class="component-title">Miscellaneous Title</span>
+          </span>
+          <span class="component-action" aria-label="Open">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M5 11 11 5" />
+              <path d="M6 5h5v5" />
+            </svg>
+          </span>
+        </a>
+      </nav>
     </main>
   </body>
 </html>
