@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compose Message AI Box</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="stage" aria-label="Compose message AI box prototype">
+      <section class="compose-box" aria-label="Compose message">
+        <div class="prompt-row is-active" data-prompt-row>
+          <div class="cursor-mark" aria-hidden="true"></div>
+          <label class="sr-only" for="prompt-input">Ask anything</label>
+          <textarea
+            id="prompt-input"
+            class="prompt-input"
+            rows="1"
+            autocomplete="off"
+            autofocus
+          ></textarea>
+          <div class="prompt-placeholder prompt-placeholder-default" aria-hidden="true">Ask anything</div>
+          <div class="prompt-placeholder prompt-placeholder-search" aria-hidden="true">Search the web</div>
+        </div>
+
+        <div class="toolbar" aria-label="Compose actions">
+          <div class="tool-group" aria-label="Message tools">
+            <div class="menu-anchor">
+              <button class="icon-button" type="button" data-action="add" aria-label="Add" aria-expanded="false">
+                <span class="icon-slot">
+                  <svg class="icon-plus" width="20" height="20" viewBox="1.5 1.5 15 15" aria-hidden="true">
+                    <path d="M9 4.625v8.75" />
+                    <path d="M4.625 9h8.75" />
+                  </svg>
+                </span>
+              </button>
+              <div class="dropdown-menu" data-menu="add" role="menu" aria-label="Add menu">
+                <button class="dropdown-item" type="button" role="menuitem">Images</button>
+                <button class="dropdown-item" type="button" role="menuitem">Documents</button>
+              </div>
+            </div>
+
+            <button class="icon-button" type="button" data-action="globe" aria-label="Web context">
+              <span class="icon-slot">
+                <svg class="icon-globe" width="16" height="16" viewBox="0 0 12 12" aria-hidden="true">
+                  <circle cx="6" cy="6" r="5" />
+                  <path d="M1 6h10" />
+                  <path d="M6 1a7.65 7.65 0 0 1 0 10" />
+                  <path d="M6 1a7.65 7.65 0 0 0 0 10" />
+                </svg>
+              </span>
+              <span class="button-label">Search</span>
+            </button>
+
+            <div class="menu-anchor">
+              <button class="model-button" type="button" data-action="lightbulb" aria-label="Model" aria-expanded="false">
+                <span class="ai-icon-slot">
+                  <svg class="icon-ai" width="16" height="16" viewBox="0 0 12 12" aria-hidden="true">
+                    <path d="M6 1.25l0.95 2.85 2.8 1-2.8 0.95L6 8.85l-0.95-2.8-2.8-0.95 2.8-1Z" />
+                    <path d="M9.35 7.65l0.35 1.05 1.05 0.35-1.05 0.35-0.35 1.05L9 9.4l-1.05-0.35L9 8.7Z" />
+                  </svg>
+                </span>
+                <span class="model-label-wrap">
+                  <span class="model-label model-label-current">GPT-4o</span>
+                  <span class="model-label model-label-next" aria-hidden="true"></span>
+                </span>
+              </button>
+              <div class="dropdown-menu" data-menu="lightbulb" role="menu" aria-label="Model menu">
+                <button class="dropdown-item" type="button" role="menuitem">GPT-5.6 Sol</button>
+                <button class="dropdown-item" type="button" role="menuitem">Claude Sonnet 5</button>
+                <button class="dropdown-item" type="button" role="menuitem">Gemini 3.6 Flash</button>
+                <button class="dropdown-item" type="button" role="menuitem">Llama 4</button>
+              </div>
+            </div>
+          </div>
+
+          <button class="send-button" type="button" data-action="send" aria-label="Send message">
+            <svg class="icon-send" width="16" height="16" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M11 1l-3.5 10-2-4.5-4.5-2Z" />
+              <path d="M11 1L5.5 6.5" />
+            </svg>
+          </button>
+        </div>
+      </section>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
