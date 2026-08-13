@@ -139,7 +139,8 @@ button {
     border-color 160ms ease;
 }
 
-.market-pill:hover {
+.market-pill:hover,
+.market-pill.is-hovered {
   border-color: var(--control-hover-border);
   background: var(--control-hover);
 }
@@ -201,8 +202,8 @@ button {
 }
 
 .price {
-  min-width: var(--price-width, 8ch);
-  flex: 0 0 auto;
+  width: var(--price-width, 8ch);
+  flex: 0 0 var(--price-width, 8ch);
   color: #fff;
   text-align: right;
 }
@@ -220,9 +221,11 @@ button {
 
 .percent {
   display: inline-flex;
-  flex: 0 0 auto;
+  width: var(--percent-width, 6.8ch);
+  flex: 0 0 var(--percent-width, 6.8ch);
   align-items: center;
   gap: 2px;
+  justify-content: flex-end;
 }
 
 .rolling-value {
@@ -231,6 +234,7 @@ button {
   align-items: center;
   overflow: visible;
   vertical-align: top;
+  flex: 0 0 auto;
 }
 
 .digit-slot {
@@ -244,8 +248,8 @@ button {
 }
 
 .symbol-slot {
-  width: auto;
-  min-width: 0.64ch;
+  width: 0.72ch;
+  min-width: 0.72ch;
   padding-inline: 0.5px;
 }
 
@@ -355,6 +359,7 @@ button {
 }
 
 .market-pill:hover .delete-cluster,
+.market-pill.is-hovered .delete-cluster,
 .market-pill:focus-within .delete-cluster {
   width: 41px;
   margin-left: 0;

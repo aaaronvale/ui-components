@@ -7,7 +7,8 @@ const MARKETS = [
     color: "#F7931A",
     iconUrl: "https://app.paper.design/file-assets/01KZRS79EC7Q4AZGWWZFYYVFMA/0RNQZ6QX4S19BZ0SCP8DP128MF.png",
     range: 92,
-    priceWidth: "9ch",
+    priceWidth: "10.2ch",
+    percentWidth: "6.8ch",
   },
   {
     symbol: "ETH",
@@ -17,7 +18,8 @@ const MARKETS = [
     color: "#7B74FF",
     iconUrl: "https://app.paper.design/file-assets/01KZRS79EC7Q4AZGWWZFYYVFMA/243NXCP42SCRVYS1B2PFC223QZ.png",
     range: 18,
-    priceWidth: "8ch",
+    priceWidth: "8.7ch",
+    percentWidth: "6.8ch",
   },
 ];
 
@@ -125,7 +127,18 @@ function createPill(market, previousValues, canDelete) {
 
   const pill = document.createElement("div");
   pill.className = "market-pill";
+  if (hoveredSymbol === market.symbol) {
+    pill.classList.add("is-hovered");
+  }
   pill.setAttribute("aria-label", `${market.name} market pill`);
+  pill.addEventListener("pointerenter", () => {
+    hoveredSymbol = market.symbol;
+  });
+  pill.addEventListener("pointerleave", () => {
+    if (hoveredSymbol === market.symbol) {
+      hoveredSymbol = null;
+    }
+  });
 
   const main = document.createElement("div");
   main.className = "market-main";
@@ -165,6 +178,7 @@ function createPill(market, previousValues, canDelete) {
   stats.className = "market-stats";
   const percent = document.createElement("span");
   percent.className = market.percent >= 0 ? "percent positive" : "percent negative";
+  percent.style.setProperty("--percent-width", market.percentWidth);
   const percentText = `${formatSigned(market.percent)}%`;
   percent.append(renderRollingValue(percentText, previousValues.get(`${market.symbol}:percent`)));
   previousValues.set(`${market.symbol}:percent`, percentText);
@@ -227,6 +241,7 @@ function animateLayout(previousRects) {
 }
 
 const previousValues = new Map();
+let hoveredSymbol = null;
 
 function render(previousRects = new Map()) {
   const canAdd = selectedSymbols.length < Math.min(MAX_PILLS, MARKETS.length);
