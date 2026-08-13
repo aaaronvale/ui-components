@@ -202,10 +202,9 @@ button {
 }
 
 .price {
-  width: var(--price-width, 8ch);
-  flex: 0 0 var(--price-width, 8ch);
+  flex: 0 0 auto;
   color: #fff;
-  text-align: right;
+  text-align: left;
 }
 
 .divider {
@@ -221,11 +220,10 @@ button {
 
 .percent {
   display: inline-flex;
-  width: var(--percent-width, 6.8ch);
-  flex: 0 0 var(--percent-width, 6.8ch);
+  flex: 0 0 auto;
   align-items: center;
   gap: 2px;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .rolling-value {
@@ -248,9 +246,11 @@ button {
 }
 
 .symbol-slot {
-  width: 0.72ch;
-  min-width: 0.72ch;
-  padding-inline: 0.5px;
+  display: inline-block;
+  height: 16px;
+  line-height: 16px;
+  overflow: visible;
+  vertical-align: top;
 }
 
 .digit-track {
@@ -267,7 +267,7 @@ button {
 }
 
 .digit-track.is-rolling {
-  animation: digit-roll 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: digit-roll 520ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes digit-roll {

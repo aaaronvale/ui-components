@@ -7,8 +7,6 @@ const MARKETS = [
     color: "#F7931A",
     iconUrl: "https://app.paper.design/file-assets/01KZRS79EC7Q4AZGWWZFYYVFMA/0RNQZ6QX4S19BZ0SCP8DP128MF.png",
     range: 92,
-    priceWidth: "10.2ch",
-    percentWidth: "6.8ch",
   },
   {
     symbol: "ETH",
@@ -18,8 +16,6 @@ const MARKETS = [
     color: "#7B74FF",
     iconUrl: "https://app.paper.design/file-assets/01KZRS79EC7Q4AZGWWZFYYVFMA/243NXCP42SCRVYS1B2PFC223QZ.png",
     range: 18,
-    priceWidth: "8.7ch",
-    percentWidth: "6.8ch",
   },
 ];
 
@@ -93,10 +89,10 @@ function renderRollingValue(value, previousValue) {
 
   currentCharacters.forEach((character, index) => {
     const previousCharacter = previousCharacters[index] || " ";
-    const changed = previousCharacter !== character;
-    const isDigit = /\d/.test(character) || /\d/.test(previousCharacter);
+    const isDigit = /\d/.test(character) && /\d/.test(previousCharacter);
+    const changed = isDigit && previousCharacter !== character;
     const slot = document.createElement("span");
-    slot.className = isDigit ? "digit-slot" : "digit-slot symbol-slot";
+    slot.className = isDigit ? "digit-slot" : "symbol-slot";
 
     if (changed) {
       const track = document.createElement("span");
@@ -127,18 +123,11 @@ function createPill(market, previousValues, canDelete) {
 
   const pill = document.createElement("div");
   pill.className = "market-pill";
+  pill.dataset.symbol = market.symbol;
   if (hoveredSymbol === market.symbol) {
     pill.classList.add("is-hovered");
   }
   pill.setAttribute("aria-label", `${market.name} market pill`);
-  pill.addEventListener("pointerenter", () => {
-    hoveredSymbol = market.symbol;
-  });
-  pill.addEventListener("pointerleave", () => {
-    if (hoveredSymbol === market.symbol) {
-      hoveredSymbol = null;
-    }
-  });
 
   const main = document.createElement("div");
   main.className = "market-main";
@@ -165,7 +154,6 @@ function createPill(market, previousValues, canDelete) {
 
   const price = document.createElement("span");
   price.className = "price";
-  price.style.setProperty("--price-width", market.priceWidth);
   const priceText = `$${currencyFormatter.format(market.price)}`;
   price.append(renderRollingValue(priceText, previousValues.get(`${market.symbol}:price`)));
   previousValues.set(`${market.symbol}:price`, priceText);
@@ -178,7 +166,6 @@ function createPill(market, previousValues, canDelete) {
   stats.className = "market-stats";
   const percent = document.createElement("span");
   percent.className = market.percent >= 0 ? "percent positive" : "percent negative";
-  percent.style.setProperty("--percent-width", market.percentWidth);
   const percentText = `${formatSigned(market.percent)}%`;
   percent.append(renderRollingValue(percentText, previousValues.get(`${market.symbol}:percent`)));
   previousValues.set(`${market.symbol}:percent`, percentText);
@@ -242,8 +229,25 @@ function animateLayout(previousRects) {
 
 const previousValues = new Map();
 let hoveredSymbol = null;
+let pointerX = null;
+let pointerY = null;
+
+function syncHoveredSymbol() {
+  if (pointerX === null || pointerY === null) {
+    hoveredSymbol = null;
+    return;
+  }
+
+  const pill = document.elementFromPoint(pointerX, pointerY)?.closest(".market-pill");
+  hoveredSymbol = pill?.dataset.symbol || null;
+
+  group.querySelectorAll(".market-pill").forEach((element) => {
+    element.classList.toggle("is-hovered", element.dataset.symbol === hoveredSymbol);
+  });
+}
 
 function render(previousRects = new Map()) {
+  syncHoveredSymbol();
   const canAdd = selectedSymbols.length < Math.min(MAX_PILLS, MARKETS.length);
   const canDelete = selectedSymbols.length > 1;
   group.replaceChildren();
@@ -267,7 +271,10 @@ function render(previousRects = new Map()) {
     group.append(add);
   }
 
-  requestAnimationFrame(() => animateLayout(previousRects));
+  requestAnimationFrame(() => {
+    syncHoveredSymbol();
+    animateLayout(previousRects);
+  });
 }
 
 function addNextMarket() {
@@ -290,6 +297,18 @@ function deleteMarket(symbol) {
 }
 
 render();
+
+document.addEventListener("pointermove", (event) => {
+  pointerX = event.clientX;
+  pointerY = event.clientY;
+  syncHoveredSymbol();
+});
+
+document.addEventListener("pointerleave", () => {
+  pointerX = null;
+  pointerY = null;
+  syncHoveredSymbol();
+});
 
 window.setInterval(() => {
   tick += 1;
