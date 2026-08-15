@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Card</title>
-    <script type="module" crossorigin src="./assets/index-DSeqyldK.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-D5CIIdgv.css">
+    <script type="module" crossorigin src="./assets/index-DLGc0Ldt.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CiNWx6MO.css">
     <style>
       .back-link {
         align-items: center;
@@ -36,6 +36,36 @@
 
       .back-link:hover {
         color: #0287f2;
+      }
+
+      .back-link:hover svg {
+        animation: back-arrow-shake 560ms cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      @keyframes back-arrow-shake {
+        0% {
+          transform: rotate(225deg) translateX(0) scale(1);
+        }
+
+        18% {
+          transform: rotate(218deg) translateX(-1px) scale(1.025);
+        }
+
+        40% {
+          transform: rotate(231deg) translateX(1px) scale(1.025);
+        }
+
+        62% {
+          transform: rotate(221.5deg) translateX(-0.5px) scale(1.012);
+        }
+
+        82% {
+          transform: rotate(227deg) translateX(0.35px) scale(1.006);
+        }
+
+        100% {
+          transform: rotate(225deg) translateX(0) scale(1);
+        }
       }
     </style>
   </head>
