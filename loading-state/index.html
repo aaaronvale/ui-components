@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading state</title>
+    <script type="module" crossorigin src="./assets/index-Bvh1X-SK.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BnfrYB4k.css">
+    <style>
+      .back-link {
+        align-items: center;
+        color: #f2f2f2;
+        display: inline-flex;
+        font-family: Inter, system-ui, sans-serif;
+        font-size: 14px;
+        gap: 8px;
+        left: 24px;
+        line-height: 18px;
+        position: fixed;
+        text-decoration: none;
+        top: 24px;
+        transition: color 180ms ease;
+        z-index: 10;
+      }
+
+      .back-link svg {
+        fill: none;
+        height: 18px;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.5;
+        transform: rotate(225deg);
+        width: 18px;
+      }
+
+      .back-link:hover {
+        color: #ffffff;
+      }
+
+      .back-link:hover svg {
+        animation: back-arrow-shake 560ms cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      @keyframes back-arrow-shake {
+        0% {
+          transform: rotate(225deg) translateX(0) scale(1);
+        }
+
+        18% {
+          transform: rotate(218deg) translateX(-1px) scale(1.025);
+        }
+
+        40% {
+          transform: rotate(231deg) translateX(1px) scale(1.025);
+        }
+
+        62% {
+          transform: rotate(221.5deg) translateX(-0.5px) scale(1.012);
+        }
+
+        82% {
+          transform: rotate(227deg) translateX(0.35px) scale(1.006);
+        }
+
+        100% {
+          transform: rotate(225deg) translateX(0) scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="back-link" href="../" aria-label="Back to Playground">
+      <svg viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M5 11 11 5" />
+        <path d="M6 5h5v5" />
+      </svg>
+      Back
+    </a>
+    <div id="root"></div>
+  </body>
+</html>
