@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Input Box v2</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="back-link" href="../" aria-label="Back to Playground">
+      <svg viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M5 11 11 5" />
+        <path d="M6 5h5v5" />
+      </svg>
+      Back
+    </a>
+    <main class="stage" aria-label="AI Input Box v2 prototype">
+      <section class="ai-frame" aria-label="AI Input Box v2">
+        <div class="status-panel" aria-live="polite" aria-hidden="true">
+          <div class="status-row">
+            <span class="status-icon" aria-hidden="true">
+              <span class="status-orb" data-status-orb></span>
+              <span class="status-check-icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+                  <path d="M3.25 6.15 5.15 8 8.85 4" />
+                </svg>
+              </span>
+            </span>
+            <span class="status-text" data-status-text data-text="Checking permissions...">Checking permissions...</span>
+          </div>
+          <button class="status-stop-button" type="button" data-action="status-stop" aria-label="Stop">
+            <svg class="icon-stop" width="12" height="12" viewBox="0 0 10 10" aria-hidden="true">
+              <rect x="2.25" y="2.25" width="5.5" height="5.5" rx="1.1" />
+            </svg>
+          </button>
+        </div>
+
+        <form class="compose-box is-active" data-compose-box>
+          <div class="compose-beam-host" data-compose-beam aria-hidden="true"></div>
+          <label class="sr-only" for="follow-up-input">Type something to test me out</label>
+          <div class="prompt-row is-active" data-prompt-row>
+            <div class="cursor-mark" aria-hidden="true"></div>
+            <textarea
+              id="follow-up-input"
+              class="prompt-input"
+              rows="1"
+              autocomplete="off"
+            ></textarea>
+            <div class="prompt-placeholder" aria-hidden="true">Type something to test me out...</div>
+          </div>
+
+          <div class="toolbar" aria-label="Follow-up actions">
+            <div class="menu-anchor">
+              <button class="icon-button" type="button" data-action="add" aria-label="Add context" aria-expanded="false">
+                <span class="icon-slot">
+                  <svg class="icon-plus" width="20" height="20" viewBox="1.5 1.5 15 15" aria-hidden="true">
+                    <path d="M9 4.625v8.75" />
+                    <path d="M4.625 9h8.75" />
+                  </svg>
+                </span>
+              </button>
+              <div class="dropdown-menu" role="menu" aria-label="Add context menu">
+                <button class="dropdown-item" type="button" role="menuitem">Attach file</button>
+                <button class="dropdown-item" type="button" role="menuitem">Add screenshot</button>
+              </div>
+            </div>
+
+            <button class="send-button" type="submit" data-action="send" aria-label="Send follow-up message">
+              <svg class="icon-send" width="16" height="16" viewBox="0 0 12 12" aria-hidden="true">
+                <path d="M11 1l-3.5 10-2-4.5-4.5-2Z" />
+                <path d="M11 1 5.5 6.5" />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
